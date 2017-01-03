@@ -1,0 +1,44 @@
+{
+  "name": "bounded-context-stuff-doer",
+  "version": "0.0.1",
+  "description": "do stuff to bounded contexts",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.alias.sharecare.com/dgempesaw/bounded-context-stuff-doer.git"
+  },
+  "scripts": {
+    "start": "babel-node lib/cli.js",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill",
+    "test-watch": "mocha --compilers js:babel-register --require babel-polyfill --watch"
+  },
+  "keywords": [
+    "bounded",
+    "context",
+    "restart",
+    "deploy",
+    "update",
+    "build",
+    "siteops",
+    "pls"
+  ],
+  "author": "Minh Nguyen <mnguyen@sharecare.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "babel-root-import": "^4.1.5",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "testdouble": "^1.10.2"
+  },
+  "dependencies": {
+    "prompt": "^1.0.0",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3",
+    "xmldoc": "^1.0.0"
+  }
+}
