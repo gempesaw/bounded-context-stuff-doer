@@ -2,15 +2,16 @@
   "name": "bounded-context-stuff-doer",
   "version": "0.0.1",
   "description": "do stuff to bounded contexts",
-  "main": "app.js",
+  "main": "src/app.js",
   "repository": {
     "type": "git",
-    "url": "git+https://git.alias.sharecare.com/dgempesaw/bounded-context-stuff-doer.git"
+    "url": "git+https://github.com/gempesaw/bounded-context-stuff-doer.git"
   },
   "scripts": {
     "start": "babel-node lib/cli.js",
     "test": "mocha --compilers js:babel-register --require babel-polyfill",
-    "test-watch": "mocha --compilers js:babel-register --require babel-polyfill --watch"
+    "test-watch": "mocha --compilers js:babel-register --require babel-polyfill --watch",
+    "build": "rm -rf ./src && babel lib -d src/lib && babel app.js -d src"
   },
   "keywords": [
     "bounded",
