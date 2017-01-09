@@ -15,6 +15,8 @@ var config = {
         for (var key in cfg) {
             config[key] = cfg[key];
         }
+
+        return config;
     }
 };
 
