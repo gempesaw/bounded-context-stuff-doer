@@ -35,7 +35,7 @@ describe('Build number', () => {
         td.when(getFromAdminUi(build.updateUri(context)))
             .thenReturn(Promise.resolve('Record updated: stuff'));
 
-        const updated = await build.update('new build', context);
+        const updated = await build.update(context, 'new build');
         expect(updated).to.be.truthy;
     });
 

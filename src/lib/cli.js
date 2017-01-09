@@ -40,7 +40,7 @@ var bindYourContext = function () {
                                                     }
 
                                                     _context.next = 3;
-                                                    return _build2.default.update(newestBuild, context);
+                                                    return _build2.default.update(context, newestBuild);
 
                                                 case 3:
                                                     updated = _context.sent;
@@ -77,13 +77,13 @@ var bindYourContext = function () {
     };
 }();
 
-var _config = require('./config');
-
-var _config2 = _interopRequireDefault(_config);
-
 var _prompt = require('prompt');
 
 var _prompt2 = _interopRequireDefault(_prompt);
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
 
 var _build = require('./build');
 

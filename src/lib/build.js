@@ -111,8 +111,9 @@ var getNewestBuild = function () {
 
 // (String, String) -> Either[String, Error]
 var updateBuild = function () {
-    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(build) {
-        var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "articles-microsite";
+    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+        var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "articles-microsite";
+        var build = arguments[1];
         var uri, updated;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
@@ -135,7 +136,7 @@ var updateBuild = function () {
                         return _context3.abrupt('return', updated);
 
                     case 10:
-                        (0, _log2.default)('Build Update failure: ' + updated, 'updateBuild(' + build + ', ' + context + ')');
+                        (0, _log2.default)('Build Update failure: ' + updated, 'updateBuild(' + context + ', ' + build + ')');
                         return _context3.abrupt('return', new Error('Uhh, weird'));
 
                     case 12:
@@ -157,7 +158,7 @@ var updateBuild = function () {
         }, _callee3, this, [[0, 14]]);
     }));
 
-    return function updateBuild(_x3) {
+    return function updateBuild() {
         return _ref3.apply(this, arguments);
     };
 }();
