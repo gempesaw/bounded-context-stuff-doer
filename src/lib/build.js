@@ -119,7 +119,7 @@ var updateBuild = function () {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         _context3.prev = 0;
-                        uri = updateUri(context);
+                        uri = updateUri(context, build);
                         _context3.next = 4;
                         return _http2.default.getFromAdminUi(uri);
 
@@ -186,7 +186,7 @@ var newestUri = function newestUri(context) {
     return '/builds/getBuildFileList?site=sc&buildpath=builds/' + context + '/rc/';
 };
 
-var updateUri = function updateUri(context) {
+var updateUri = function updateUri(context, build) {
     return '/builds/update?site=sc&env=kms&product=' + context + '&bucket=kms-' + context + '-build&build=' + build;
 };
 

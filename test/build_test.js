@@ -32,11 +32,10 @@ describe('Build number', () => {
     });
 
     it('should update the build number', async function () {
-        td.when(getFromAdminUi(build.updateUri(context)))
+        td.when(getFromAdminUi(build.updateUri(context, 'new-build')))
             .thenReturn(Promise.resolve('Record updated: stuff'));
-
-        const updated = await build.update(context, 'new build');
-        expect(updated).to.be.truthy;
+        const updated = await build.update(context, 'new-build');
+        expect(updated).not.to.be.an('error');
     });
 
     afterEach(() => td.reset());
