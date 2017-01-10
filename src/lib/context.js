@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var validContexts = ['articles-microsite'];
+var validContexts = ['articles-microsite', 'slideshows-microsite'];
 
 var coerce = function coerce(context) {
     return validContexts.includes(context);
