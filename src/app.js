@@ -27,5 +27,6 @@ exports.default = {
     newest: _context2.default.coerceFn(_build2.default.newest),
     update: _context2.default.coerceFn(_build2.default.update),
     restart: _context2.default.coerceFn(_restart2.default.queue),
+    validateContext: _context2.default.coerce,
     setConfig: _config2.default.set
 };

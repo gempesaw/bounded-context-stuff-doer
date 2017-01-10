@@ -8,5 +8,6 @@ export default {
     newest: context.coerceFn(build.newest),
     update: context.coerceFn(build.update),
     restart: context.coerceFn(restart.queue),
+    validateContext: context.coerce,
     setConfig: config.set
 };

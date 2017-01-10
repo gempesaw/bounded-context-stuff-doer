@@ -19,5 +19,5 @@ function coerceFn(fn) {
     };
 }
 
-var context = { coerceFn: coerceFn };
+var context = { coerceFn: coerceFn, coerce: coerce };
 exports.default = context;

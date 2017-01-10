@@ -1,6 +1,6 @@
 {
   "name": "bounded-context-stuff-doer",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "do stuff to bounded contexts",
   "main": "src/app.js",
   "repository": {
