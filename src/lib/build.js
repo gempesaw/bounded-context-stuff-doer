@@ -85,18 +85,17 @@ var getNewestBuild = function () {
                         return _context2.abrupt('return', new Error('Could not find newest build number'));
 
                     case 11:
-                        _context2.next = 18;
+                        _context2.next = 17;
                         break;
 
                     case 13:
                         _context2.prev = 13;
                         _context2.t0 = _context2['catch'](0);
 
-                        console.log(_context2.t0, _context2.t0.stack);
                         (0, _log2.default)(_context2.t0, _context2.t0.stack);
                         return _context2.abrupt('return', _context2.t0);
 
-                    case 18:
+                    case 17:
                     case 'end':
                         return _context2.stop();
                 }
