@@ -60,7 +60,7 @@ var getCurrentBuild = function () {
 var getNewestBuild = function () {
     var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
         var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "articles-microsite";
-        var res, newBuilds;
+        var res, newBuild;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -71,36 +71,22 @@ var getNewestBuild = function () {
 
                     case 3:
                         res = _context2.sent;
-                        newBuilds = parseNewBuilds(res);
+                        newBuild = parseNewBuilds(res);
+                        return _context2.abrupt('return', newBuild);
 
-                        if (!(newBuilds && newBuilds.length)) {
-                            _context2.next = 9;
-                            break;
-                        }
-
-                        return _context2.abrupt('return', newBuilds[newBuilds.length - 1]);
-
-                    case 9:
-                        (0, _log2.default)(newBuilds, 'getNewestBuild(' + context + ')');
-                        return _context2.abrupt('return', new Error('Could not find newest build number'));
-
-                    case 11:
-                        _context2.next = 17;
-                        break;
-
-                    case 13:
-                        _context2.prev = 13;
+                    case 8:
+                        _context2.prev = 8;
                         _context2.t0 = _context2['catch'](0);
 
                         (0, _log2.default)(_context2.t0, _context2.t0.stack);
                         return _context2.abrupt('return', _context2.t0);
 
-                    case 17:
+                    case 12:
                     case 'end':
                         return _context2.stop();
                 }
             }
-        }, _callee2, this, [[0, 13]]);
+        }, _callee2, this, [[0, 8]]);
     }));
 
     return function getNewestBuild() {
@@ -166,6 +152,10 @@ var _xmldoc = require('xmldoc');
 
 var _xmldoc2 = _interopRequireDefault(_xmldoc);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _log = require('./log');
 
 var _log2 = _interopRequireDefault(_log);
@@ -193,15 +183,27 @@ var updateUri = function updateUri(context, build) {
 function parseNewBuilds(xml) {
     var builds = new _xmldoc2.default.XmlDocument(xml);
 
+    var timestampRegex = new RegExp('_(' + new Date().getUTCFullYear() + '.*)');
+
     var newBuilds = [];
     builds.eachChild(function (child, index, array) {
-        newBuilds.push(child.children[1].val);
+        var build = child.children[1].val;
+        var timestamp = (build.match(timestampRegex) || [,])[1];
+        var time = (0, _moment2.default)(timestamp, 'YYYY-MM-DD_HH-mm-ss-Z');
+        if (build && time.isValid()) {
+            newBuilds.push({ build: build, time: time });
+        }
     });
 
-    var thisYear = new RegExp('_' + new Date().getUTCFullYear() + '-');
-    return newBuilds.filter(function (it) {
-        return thisYear.test(it);
+    var sorted = newBuilds.sort(function (a, b) {
+        return a.time - b.time;
     });
+    if (sorted && sorted.length) {
+        return sorted[sorted.length - 1].build;
+    } else {
+        (0, _log2.default)(sorted, 'parseNewBuilds()');
+        return new Error('Could not find newest build number');
+    }
 }
 
 var build = {
