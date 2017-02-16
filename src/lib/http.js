@@ -23,11 +23,7 @@ function getFromAdminUi(path) {
 
     (0, _log2.default)('GET ' + path);
 
-    // `Buffer.from` is preferred in newer nodes > 6.0, but 4.3.2
-    // crashes out on `Buffer.from`, and all of our microsites use
-    // 4.3.2. Since >6.0 can handle `new Buffer` at time of writing,
-    // we use this deprecated version to accomodate both.
-    var auth = new Buffer(_config2.default.username + ':' + _config2.default.password).toString('base64');
+    var auth = Buffer.from(_config2.default.username + ':' + _config2.default.password).toString('base64');
     var headers = { Authorization: 'Basic ' + auth };
 
     return request({

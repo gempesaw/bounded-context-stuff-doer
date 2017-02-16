@@ -4,10 +4,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var config = {
-    base: 'https://ADMINUI_DOMAIN/adminui',
-    username: 'AD_USERNAME',
-    password: 'AD_PASSWORD',
-    defaultBox: 'KMS_MICROSITE_TERMINUS_BOX_URL', // env-##.terminus...
+    base: 'https://ADMINUI-DOMAIN/adminui',
+    username: 'AD-USERNAME',
+    password: 'AD-PASSWORD',
+    apiEnv: 'API-ENV',
+    apiBox: 'API-BOX',
+    siteEnv: 'SITE-ENV',
+    siteBox: 'SITE-BOX',
 
     debug: true,
 

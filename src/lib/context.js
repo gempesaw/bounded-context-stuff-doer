@@ -3,11 +3,43 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var validContexts = ['articles-microsite', 'slideshows-microsite', 'health-guides-microsite'];
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var validContexts = ['articles-microsite', 'slideshows-microsite', 'health-guides-microsite', 'health-guides-api', 'quizzes-api'];
+
+var getContexts = function getContexts() {
+    return validContexts;
+};
+
+var getDetails = function getDetails(context) {
+    if (/-api$/.test(context)) {
+        return {
+            env: _config2.default.apiEnv,
+            box: _config2.default.apiBox,
+            context: context
+        };
+    }
+
+    if (/-microsite$/.test(context)) {
+        return {
+            env: _config2.default.siteEnv,
+            box: _config2.default.siteBox,
+            context: context
+        };
+    }
+
+    return Error('Somehow, we couldn\'t suss out the details for ' + context);
+};
 
 var coerce = function coerce(context) {
-    return validContexts.includes(context);
+    return getContexts().includes(context);
 };
+
 function coerceFn(fn) {
     return function () {
         var context = arguments.length <= 0 ? undefined : arguments[0];
@@ -19,5 +51,5 @@ function coerceFn(fn) {
     };
 }
 
-var context = { coerceFn: coerceFn, coerce: coerce };
+var context = { coerceFn: coerceFn, coerce: coerce, getDetails: getDetails, getContexts: getContexts };
 exports.default = context;

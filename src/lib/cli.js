@@ -22,14 +22,13 @@ var bindYourContext = function () {
 
                         console.log('Current Build: ' + currentBuild + '\nNewest Build:  ' + newestBuild);
                         if (currentBuild === newestBuild) {
-                            console.log('The newest build is already deployeed; bye');
+                            console.log('The newest build is already deployed; bye');
                             process.exit(0);
                         } else {
                             console.log('Update build number and deploy?');
                             _prompt2.default.get(['confirm'], function () {
                                 var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee(err, result) {
-                                    var updated, _restart;
-
+                                    var updated, restarted;
                                     return regeneratorRuntime.wrap(function _callee$(_context) {
                                         while (1) {
                                             switch (_context.prev = _context.next) {
@@ -45,10 +44,10 @@ var bindYourContext = function () {
                                                 case 3:
                                                     updated = _context.sent;
                                                     _context.next = 6;
-                                                    return _restart.queue(context);
+                                                    return _restart2.default.queue(context);
 
                                                 case 6:
-                                                    _restart = _context.sent;
+                                                    restarted = _context.sent;
 
                                                 case 7:
                                                 case 'end':
@@ -89,9 +88,9 @@ var _build = require('./build');
 
 var _build2 = _interopRequireDefault(_build);
 
-var _restart2 = require('./restart');
+var _restart = require('./restart');
 
-var _restart3 = _interopRequireDefault(_restart2);
+var _restart2 = _interopRequireDefault(_restart);
 
 var _context3 = require('./context');
 

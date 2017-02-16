@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 // String -> Either[String, Error]
 var getCurrentBuild = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
         var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "articles-microsite";
         var res, matches;
         return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -52,13 +52,13 @@ var getCurrentBuild = function () {
     }));
 
     return function getCurrentBuild() {
-        return _ref.apply(this, arguments);
+        return _ref2.apply(this, arguments);
     };
 }();
 
 // String -> Either[String, Error]
 var getNewestBuild = function () {
-    var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
         var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "articles-microsite";
         var res, newBuild;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -90,13 +90,13 @@ var getNewestBuild = function () {
     }));
 
     return function getNewestBuild() {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
     };
 }();
 
 // (String, String) -> Either[String, Error]
 var updateBuild = function () {
-    var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+    var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
         var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "articles-microsite";
         var build = arguments[1];
         var uri, updated;
@@ -105,7 +105,7 @@ var updateBuild = function () {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         _context3.prev = 0;
-                        uri = updateUri(context, build);
+                        uri = updateUri(context)(build);
                         _context3.next = 4;
                         return _http2.default.getFromAdminUi(uri);
 
@@ -144,7 +144,7 @@ var updateBuild = function () {
     }));
 
     return function updateBuild() {
-        return _ref3.apply(this, arguments);
+        return _ref5.apply(this, arguments);
     };
 }();
 
@@ -156,6 +156,10 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _ramda = require('ramda');
+
+var _ramda2 = _interopRequireDefault(_ramda);
+
 var _log = require('./log');
 
 var _log2 = _interopRequireDefault(_log);
@@ -164,21 +168,31 @@ var _http = require('./http');
 
 var _http2 = _interopRequireDefault(_http);
 
+var _context4 = require('./context');
+
+var _context5 = _interopRequireDefault(_context4);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var currentUri = function currentUri(context) {
-    return '/builds/get?env=kms&product=' + context + '&site=sc';
-};
+var currentUri = _ramda2.default.pipe(_context5.default.getDetails, function (_ref) {
+    var env = _ref.env,
+        context = _ref.context;
+    return '/builds/get?env=' + env + '&product=' + context + '&site=sc';
+});
 
 var newestUri = function newestUri(context) {
     return '/builds/getBuildFileList?site=sc&buildpath=builds/' + context + '/rc/';
 };
 
-var updateUri = function updateUri(context, build) {
-    return '/builds/update?site=sc&env=kms&product=' + context + '&bucket=kms-' + context + '-build&build=' + build;
-};
+var updateUri = _ramda2.default.pipe(_context5.default.getDetails, function (_ref4) {
+    var env = _ref4.env,
+        context = _ref4.context;
+    return function (build) {
+        return '/builds/update?site=sc&env=' + env + '&product=' + context + '&bucket=' + env + '-' + context + '-build&build=' + build;
+    };
+});
 
 function parseNewBuilds(xml) {
     var builds = new _xmldoc2.default.XmlDocument(xml);
