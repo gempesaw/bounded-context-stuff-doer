@@ -10,7 +10,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var validContexts = ['articles-microsite', 'slideshows-microsite', 'health-guides-microsite', 'health-guides-api', 'quizzes-api'];
+var validContexts = ['articles-microsite', 'slideshows-microsite', 'health-guides-microsite', 'health-guides-api', 'redirects-api', 'quizzes-api'];
 
 var getContexts = function getContexts() {
     return validContexts;
